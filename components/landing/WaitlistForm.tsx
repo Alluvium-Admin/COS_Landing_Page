@@ -40,7 +40,44 @@ export const WaitlistForm = () => {
       setStatus("error");
       if (axios.isAxiosError(error)) {
         if (error.response?.status === 400) {
-          setErrorMessage(error.response.data?.detail || "Validation error. Please check your inputs.");
+          const data = error.response.data;
+          let message = "Validation error. Please check your inputs.";
+          
+          if (data && typeof data === "object") {
+            if (data.detail) {
+              message = data.detail;
+            } else if (data.message) {
+              message = data.message;
+            } else {
+              // Priority: Check for nested 'Errors' or 'errors' key
+              const rawErrors = data.Errors || data.errors || data;
+              
+              if (rawErrors && typeof rawErrors === "object") {
+                const errors = Object.entries(rawErrors)
+                  .filter(([key]) => key.toLowerCase() !== "success") // Skip 'success' flag if it's at the top level
+                  .map(([key, value]) => {
+                    const fieldName = key.charAt(0).toUpperCase() + key.slice(1).replace("_", " ");
+                    let errorText = "";
+                    
+                    if (Array.isArray(value)) {
+                      errorText = value.map(v => (typeof v === 'object' ? JSON.stringify(v) : String(v))).join(", ");
+                    } else if (typeof value === 'object' && value !== null) {
+                      // If it's a nested object, try to flatten it
+                      errorText = Object.values(value).flat().join(", ");
+                    } else {
+                      errorText = String(value);
+                    }
+                    
+                    return `${fieldName}: ${errorText}`;
+                  });
+                
+                if (errors.length > 0) {
+                  message = errors.join(" | ");
+                }
+              }
+            }
+          }
+          setErrorMessage(message);
         } else {
           setErrorMessage("Network error. Please try again later.");
         }
@@ -166,9 +203,9 @@ export const WaitlistForm = () => {
                 </button>
 
                 {status === "error" && (
-                  <div className="flex items-center gap-2 text-destructive bg-destructive/5 p-3 rounded-2xl">
-                    <AlertCircle className="w-5 h-5" />
-                    <span className="text-sm font-medium">{errorMessage}</span>
+                  <div className="flex items-start gap-2 text-destructive bg-destructive/10 p-4 rounded-2xl mt-4 border border-destructive/20">
+                    <AlertCircle className="w-5 h-5 mt-0.5 shrink-0" />
+                    <span className="text-sm font-medium leading-relaxed">{errorMessage}</span>
                   </div>
                 )}
               </motion.form>

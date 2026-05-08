@@ -9,6 +9,10 @@
   --border: rgba(0, 0, 0, 0.15);
   --card: #FFFFFF;
   --accent-ai: #7C3AED;
+  --destructive: #EF4444;
+  --destructive-rgb: 239, 68, 68;
+  --success: #10B981;
+  --success-rgb: 16, 185, 129;
 }
 
 @theme inline {
@@ -20,6 +24,8 @@
   --color-border: var(--border);
   --color-card: var(--card);
   --color-accent-ai: var(--accent-ai);
+  --color-destructive: var(--destructive);
+  --color-success: var(--success);
   
   --font-sans: var(--font-plus-jakarta-sans);
   
