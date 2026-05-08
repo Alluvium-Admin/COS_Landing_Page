@@ -1,19 +1,10 @@
-export interface WaitlistFormData {
-  name: string;
+export interface WaitlistSubmission {
+  full_name: string;
   email: string;
-  role?: string;
+  role: string;
 }
 
-export interface JSMRequestPayload {
-  serviceDeskId: string;
-  requestTypeId: string;
-  requestFieldValues: {
-    [key: string]: string | number | boolean | string[] | undefined;
-  };
-}
-
-export interface JSMResponse {
-  issueId?: string;
-  issueKey?: string;
-  errorMessage?: string;
+export interface WaitlistResponse {
+  message?: string;
+  detail?: string;
 }

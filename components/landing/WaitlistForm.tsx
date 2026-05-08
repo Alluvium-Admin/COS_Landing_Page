@@ -3,7 +3,8 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
-import { submitToWaitlist } from "@/app/actions/waitlist";
+import axios from "axios";
+import { WaitlistSubmission } from "@/types/waitlist";
 
 export const WaitlistForm = () => {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
@@ -19,17 +20,33 @@ export const WaitlistForm = () => {
     setStatus("loading");
     setErrorMessage("");
 
+    const payload: WaitlistSubmission = {
+      full_name: formData.name,
+      email: formData.email,
+      role: formData.role || "Potential User", // Providing a default role if empty
+    };
+
     try {
-      const result = await submitToWaitlist(formData);
-      if (result.success) {
+      const response = await axios.post("https://bulk.ec2.alluvium.net/api/waitlist/", payload);
+      
+      // 201: Created, 200: Already on waitlist
+      if (response.status === 201 || response.status === 200) {
         setStatus("success");
       } else {
         setStatus("error");
-        setErrorMessage(result.error || "Something went wrong.");
+        setErrorMessage("Something went wrong. Please try again.");
       }
-    } catch {
+    } catch (error: unknown) {
       setStatus("error");
-      setErrorMessage("Network error. Please try again.");
+      if (axios.isAxiosError(error)) {
+        if (error.response?.status === 400) {
+          setErrorMessage(error.response.data?.detail || "Validation error. Please check your inputs.");
+        } else {
+          setErrorMessage("Network error. Please try again later.");
+        }
+      } else {
+        setErrorMessage("An unexpected error occurred.");
+      }
     }
   };
 
@@ -162,3 +179,4 @@ export const WaitlistForm = () => {
     </section>
   );
 };
+
