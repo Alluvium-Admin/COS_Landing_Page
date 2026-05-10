@@ -82,7 +82,7 @@ export const CompetitivePositioning = () => {
           viewport={{ once: true, margin: "-60px" }}
         >
           {/* Top axis labels */}
-          <div className="grid grid-cols-2 mb-1 px-px">
+          <div className="hidden md:grid grid-cols-2 mb-1 px-px">
             <p className="text-xs font-sans font-medium tracking-widest uppercase text-foreground/50 pl-4">
               {competitive.axes.yTopLeft}
             </p>
@@ -99,6 +99,9 @@ export const CompetitivePositioning = () => {
               variants={item}
               className="p-6 border-b border-r-0 md:border-r border-border bg-card/40"
             >
+              <p className="text-[11px] font-sans font-medium tracking-widest uppercase text-foreground/50 mb-4 md:hidden leading-snug">
+                {competitive.axes.yTopLeft}
+              </p>
               {competitive.topLeft.map((c) => (
                 <CompetitorRow key={c.name} name={c.name} description={c.description} />
               ))}
@@ -110,12 +113,16 @@ export const CompetitivePositioning = () => {
               className="p-6 border-b border-border bg-secondary/5 relative"
             >
               <div className="absolute top-3 right-3">
-                <span className="text-[10px] font-sans font-bold tracking-widest uppercase text-secondary border border-secondary/40 rounded-full px-2.5 py-0.5">
+                <span className="text-[10px] font-sans font-bold tracking-widest uppercase text-secondary border border-secondary/40 rounded-full px-2.5 py-0.5 bg-background/50 backdrop-blur-sm">
                   {competitive.winZone.badge}
                 </span>
               </div>
 
-              <div className="flex items-start gap-2.5 mb-5">
+              <p className="text-[11px] font-sans font-medium tracking-widest uppercase text-secondary mb-4 md:hidden leading-snug pr-20">
+                {competitive.axes.yTopRight}
+              </p>
+
+              <div className="flex items-start gap-2.5 mb-5 mt-2 md:mt-0">
                 <span className="mt-2 w-2 h-2 shrink-0 rounded-full bg-secondary" />
                 <div>
                   <p className="text-base font-sans font-bold text-foreground">
@@ -143,7 +150,7 @@ export const CompetitivePositioning = () => {
               variants={item}
               className="p-6 border-r-0 md:border-r border-t border-border bg-card/40"
             >
-              <p className="text-xs font-sans font-medium tracking-widest uppercase text-foreground/50 mb-4">
+              <p className="text-[11px] font-sans font-medium tracking-widest uppercase text-foreground/50 mb-4 leading-snug">
                 {competitive.axes.yBottomLeft}
               </p>
               {competitive.bottomLeft.map((c) => (
@@ -156,7 +163,7 @@ export const CompetitivePositioning = () => {
               variants={item}
               className="p-6 border-t border-border bg-card/40"
             >
-              <p className="text-xs font-sans font-medium tracking-widest uppercase text-foreground/50 mb-4">
+              <p className="text-[11px] font-sans font-medium tracking-widest uppercase text-foreground/50 mb-4 leading-snug">
                 {competitive.axes.yBottomRight}
               </p>
               {competitive.bottomRight.map((c) => (
@@ -166,7 +173,7 @@ export const CompetitivePositioning = () => {
           </div>
 
           {/* X-axis bottom labels */}
-          <div className="flex justify-between mt-2 px-px">
+          <div className="hidden md:flex justify-between mt-2 px-px">
             <p className="text-xs font-sans font-medium tracking-widest uppercase text-foreground/50">
               {competitive.axes.xLeft}
             </p>
