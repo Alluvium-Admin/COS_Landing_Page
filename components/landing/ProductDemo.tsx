@@ -6,7 +6,7 @@ import { HighlightAI } from "@/components/ui/HighlightAI";
 import { PhoneMockup } from "@/components/ui/PhoneMockup";
 
 const LOOM_EMBED_URL =
-  "https://www.loom.com/embed/139924b15b92430882837fc342301311?hide_owner=true&hide_share=true&hide_title=true&hideEmbedTopBar=true";
+  "https://www.loom.com/embed/eef220d9ac8d4813bf2043bee81ef83f?hide_owner=true&hide_share=true&hide_title=true&hideEmbedTopBar=true";
 
 export const ProductDemo = () => {
   const shouldReduceMotion = useReducedMotion();
