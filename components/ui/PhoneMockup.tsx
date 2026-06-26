@@ -21,6 +21,7 @@ export const PhoneMockup = ({ src, title }: PhoneMockupProps) => (
           frameBorder="0"
           allowFullScreen
           allow="autoplay; fullscreen"
+          loading="lazy"
           className="absolute inset-0 w-full h-full"
         />
       </div>
