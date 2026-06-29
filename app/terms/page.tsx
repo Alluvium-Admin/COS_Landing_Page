@@ -77,7 +77,7 @@ export default function TermsOfService() {
                 2. Description of Service
               </h2>
               <p className="text-text-muted text-sm md:text-base leading-relaxed">
-                Chief of Staff is an artificial intelligence-guided personal executive assistant that aggregates calendar events, emails, tasks, and documentation from third-party services (such as Jira, Confluence, Slack, Google Calendar, and Gmail) to present synchronized task lists, daily morning briefs, and productivity suggestions.
+                Chief of Staff is an artificial intelligence-guided personal executive assistant that aggregates calendar events, emails, tasks, and documentation from third-party services (such as Jira, Confluence, Slack, Zoho, Microsoft 365, Google Workspace, and Gmail) to present synchronized task lists, daily morning briefs, and productivity suggestions.
               </p>
             </section>
 
