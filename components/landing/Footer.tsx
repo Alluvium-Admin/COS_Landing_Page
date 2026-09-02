@@ -44,7 +44,8 @@ export const Footer = () => {
                 alt={copy.appName}
                 width={160}
                 height={35}
-                className="object-contain h-auto"
+                className="object-contain"
+                style={{ width: "auto", height: "auto" }}
               />
             </Link>
             <p className="text-text-muted text-sm leading-relaxed max-w-xs">
